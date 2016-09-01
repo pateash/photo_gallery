@@ -18,3 +18,4 @@
 09/01/16 10:41:43  | logged out  : by User Id: 1
 09/01/16 10:41:48  | logged in  : by User Id: 1
 09/01/16 10:42:20  | logged in  : by User Id: 1
+09/01/16 10:48:36  | logged out  : by User Id: 1
