@@ -1,0 +1,5 @@
+08/14/16 12:25:35  | Log cleared  : by User Id: 3
+08/14/16 12:25:39  | logged out  : by User Id: 3
+09/01/16 04:08:58  | logged in  : by User Id: 3
+09/01/16 04:08:59  | logged out  : by User Id: 3
+09/01/16 04:09:04  | logged in  : by User Id: 3
