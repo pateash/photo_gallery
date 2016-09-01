@@ -2,7 +2,7 @@
 /*
 * 
 */
-abstract class DatabaseObject
+abstract class DatabaseObject#encapsulating any object which will interect with db
 {
     #this class is here for allowing interaction of any kind of object with
     #database (example- users etc), we will create class and make it to inherited by it

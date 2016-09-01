@@ -35,11 +35,12 @@ class MySQLDatabase
     }
 
     public function query($sql){
-        $this->last_query=$sql;
+        $this->last_query=$sql;//updating last query
       #perform query and also checks for error
         $result_set=mysqli_query($this->connection,$sql);
-        if(!$result_set)
+        if(!$result_set)//if result set is null
             die("Database Query:{$this->last_query}; failed, Error no.".mysqli_errno($this->connection));
+            //query will not be shown to public here just for debugging purpose
         else
             return $result_set;
     }
@@ -74,8 +75,8 @@ class MySQLDatabase
         return mysqli_insert_id($this->connection);
     }
 }
-//making connection so that we need not to do in every page
-$database=new MySQLDatabase();
+//making connection so that we need not to do in every page 
+$database=new MySQLDatabase();//we can just take it from global and use
 
 ?>
 
