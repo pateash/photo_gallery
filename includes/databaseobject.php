@@ -190,9 +190,11 @@ protected function attributes(){
 
      //here we are escaping value and then return
      $attribute=array();
-     foreach(static::$db_fields as $field){
-        if(property_exists($this,$field))
-         $attribute[$key]=$database->escape_value($this->$key);
+     foreach(self::$db_fields as $field){
+         //here if we use static::$db_fields then it is not working
+        echo "<script> alert(".self::$table_name." ".static::$table_name."</script>";
+         if(property_exists($this,$field))
+         $attribute[$field]=$database->escape_value($this->$field);
      } 
     return $attribute;
 }
