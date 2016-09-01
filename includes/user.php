@@ -20,6 +20,8 @@ class User extends DatabaseObject
     public $last_name;
    //static data
     static $table_name='users';//static (same for all)
+    static $db_fields=array('username','password','first_name','lastname');
+    //should be of same order as we have in method
     /* the $table_name override the $table_name in databaseObject class
     */
 
@@ -44,12 +46,13 @@ class User extends DatabaseObject
         return !empty($object_array)?array_shift($object_array):false;
         //if array is empty return false else return object
        }
-
+/*
+ *  THIS FUNCTION HAS MOVED TO databaseobject.php AND GENERALISED FOR WORKING FOR ANY TYPE 
     public function create() {
    //overriding abstract create() function of databaseobject
    // insert the current user to database
         global $database;
-        $sql= "INSERT INTO users (";
+         $sql= "INSERT INTO users ("; 
         $sql.=" username,password,first_name,last_name ";
         $sql.=") VALUES (' ";
         $sql.=$database->escape_value($this->username);
@@ -66,8 +69,9 @@ class User extends DatabaseObject
         #we need not to write else because script will die as the query fails 
         #from query() function
     }
-
-    public function update() {
+*/
+    /*MOVED TO databaseobject.php for GENERALISTION
+       public function update() {
         #update the value in database from the values store in Object
      global $database;
         $sql= "UPDATE users SET ";
@@ -83,7 +87,7 @@ class User extends DatabaseObject
             //to know successfull update we have to use 
             //if affected rows in previous query is 1(0 or 1 possible)
        }
-  
+  */
     
     //static methods because they only working on given data
  /* ALL THESE METHODS HAS BEEN MOVE IN DATABASEOBJECT.PHP
