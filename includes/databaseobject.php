@@ -34,7 +34,7 @@ abstract class DatabaseObject#encapsulating any object which will interect with 
          * 2- use a array in each database object subclass which contains all 
          */
         
-        $attributes=$this->attributes();//fetching db attributes(because it is dbobject) 
+        $attributes=$this->sanitized_attributes();//fetching db attributes(because it is dbobject) 
         $sql.=join(",",array_keys($attributes));//attributes are associative array
         $sql.=" ) VALUES (' ";
         
@@ -61,7 +61,6 @@ abstract class DatabaseObject#encapsulating any object which will interect with 
         #protected so that could not be called directly
 
          global $database;
-        $sql= "UPDATE ".static::$table_name." SET ";
         
        /* REPLACED WITH FOLLOWING DATA FOR GENERALISATION
         $attributes=$this->attributes();
@@ -71,15 +70,15 @@ abstract class DatabaseObject#encapsulating any object which will interect with 
         $sql.="', last_name='".$database->escape_value($this->last_name)."'";
         $sql.="WHERE id=".$database->escape_value($this->id);
         */ 
-        $attributes=$this->attributes();//fetching db attributes(because it is dbobject) 
+        $attributes=$this->sanitized_attributes();//fetching db attributes(because it is dbobject) 
         //creating a new array of strings because here we need '=' between values
         $attribute_pair=array();
         foreach($attributes as $key=>$value){
             $attribute_pair[]="{$key} ='{$value}'"; 
         }
+        $sql= "UPDATE ".static::$table_name." SET ";
         $sql.=join(",",$attribute_pair);
         $sql.=" WHERE id=".$database->escape_value($this->id);
-        
         $database->query($sql);
          return ($database->affected_rows()==1)? true:false;
             //to know successfull update we have to use 
@@ -184,8 +183,29 @@ abstract class DatabaseObject#encapsulating any object which will interect with 
         }
        return $object;//
     }
- 
- private function has_attribute($attribute){
+protected function attributes(){
+     global $database;
+    //this function returns a associative array such as
+     // $attributes=>value, if no value return null (same as get_object_vars())
+
+     //here we are escaping value and then return
+     $attribute=array();
+     foreach(static::$db_fields as $field){
+        if(property_exists($this,$field))
+         $attribute[$key]=$database->escape_value($this->$key);
+     } 
+    return $attribute;
+}
+protected function sanitized_attributes(){
+    global $database;
+    $clean_attributes=array();
+    $attributes=$this->attributes();
+    foreach($attributes as $key => $value){
+        $clean_attributes[$key]=$database->escape_value($value);
+   }
+   return $clean_attributes;
+}
+private function has_attribute($attribute){
         //get_object_vars() return an associative array with attribute_name and value for an object
         
 /* IT IS NOT GOOD TO USE get_object_vars because it return all attributes which are 
@@ -193,23 +213,10 @@ abstract class DatabaseObject#encapsulating any object which will interect with 
  * so we make a method which will return attributes from prestored array   
  *     $attribute_array=get_object_vars($this);
  */
-     $attribute_array=attributes();
+     $attribute_array=$this->attributes();//sanitized not needed
      return array_key_exists($attribute, $attribute_array);
         }
- private function attributes(){
-     global $database;
-    //this function returns a associative array such as
-     // $attributes=>value, if no value return null (same as get_object_vars())
-
-     //here we are escaping value and then return
-     $attribute=array();
-     foreach(static::$db_fields as $key){
-     $attribute[$key]=$database->escape_value($this->{$key});
-     
-     } 
-    return $attribute;
-    }
-}
+ }
 
 
 
