@@ -54,7 +54,7 @@
 <?php 
  # this will going to write the log function 
  function log_action($action,$message){
-  echo "log action message: ".$message."<br>";
+ // echo "log action message: ".$message."<br>";
   #called from admin folder
    $log_file="../../logs/logfile.txt";
    $content=strftime("%c",time());//%c will give format like tue feb 5 00:45:10 2009 
