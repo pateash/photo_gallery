@@ -89,13 +89,35 @@ class Photograph extends DatabaseObject {
                  return false;
              }
              //finding target_path, we are in includes now
-             $target_path=
+             $target_path=SITE_ROOT.DS.'public'.DS.$this->upload_dir.DS.$this->filename;
+             //makes sure a file of same name doesn't exists already
+             if(file_exists($target_path))
+             {
+                 $this->errors[]="The file {$this->filename} already exists.";
+                 return false;
+             }
              
+            // if no error moving file
+            if(move_uploaded_file($this->temp_path,$target_path))
+            {
+
+                //SUCCESS! 
+                //saving data to db
+                if($this->create())
+                {
+                    //the file is not there in temp_path as it has been moved to 
+                    //$target_path due to move
+                    unset($this->temp_path);
+                    return true;//all things are done properly
+                }
              
-            //moving file
-            //saving data to db
-            $this->create();
-        }
+            }
+            else{
+                //FAILURE
+                $this->errors[]="The file upload failed, possibly due to incorrect permission on the upload folder";
+                return false;
+                }
+           }
     }
 
   

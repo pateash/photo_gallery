@@ -20,7 +20,7 @@
 ?>
  
  <?php 
- include_once(SITE_ROOT.DS.'public'.DS.'layouts'.DS.'admin_header.php');
+   include_layout('admin_header.php');
  ?>
     <h2 class="main-heading">Menu</h2>
       <form method="post" action="index.php">
@@ -35,5 +35,5 @@
 
     
  <?php 
- include_once(SITE_ROOT.DS.'public'.DS.'layouts'.DS.'admin_footer.php');
+  include_layout('admin_footer.php');
  ?>
