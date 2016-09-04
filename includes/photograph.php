@@ -6,7 +6,7 @@
 class Photograph extends DatabaseObject {
     //staric data used by common methods
     protected static $table_name='photographs';
-    protected static $db_fields=  ['id','filename','type','size','caption'];
+    protected static $db_fields=  ['filename','type','size','caption'];
     
     //data fields
     public $id,$filename,$type,$size,$caption;
@@ -16,7 +16,7 @@ class Photograph extends DatabaseObject {
     //we are going to use $temp_path and $upload_dir so lets make them attributete
     private $temp_path;
     protected $upload_dir="images";
-    public $errors=[];//empty array which will store the errors found
+    public $errors=array();//empty array which will store the errors found
     protected $upload_errors=array(//we can also append our error
     UPLOAD_ERR_OK => "No Errors.",
     UPLOAD_ERR_INI_SIZE => 'Larger than allowed in php.ini',
@@ -73,6 +73,7 @@ class Photograph extends DatabaseObject {
         if(isset($this->id))
         {
              $this->update();
+             return true;
         }
         else{
             //making sure no error
