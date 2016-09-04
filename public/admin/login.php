@@ -1,5 +1,6 @@
+<?php require_once('../../includes/includes.php');?>
+
 <?php 
-require_once('../../includes/includes_admin.php');
   if($session->is_logged_in()){
   	//if already logged in then no need to do this
   	redirect_to('index.php');
@@ -32,7 +33,7 @@ require_once('../../includes/includes_admin.php');
 }
 ?>
 
-<?php include_once('../layouts/admin_header.php') ?>
+<?php include_layout('admin_header.php');?>
     <h2 class="main-heading">Staff Login</h2>
     <?php echo output_message($message); ?>
     <!-- form of login -->
@@ -63,5 +64,5 @@ require_once('../../includes/includes_admin.php');
       </form>
 
 
- <?php include_once('../layouts/admin_footer.php') ?>    
+ <?php  include_layout('admin_header.php'); ?>    
  <?php if(isset($database)){unset($database);} ?>

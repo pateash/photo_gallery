@@ -28,6 +28,11 @@ class Photograph extends DatabaseObject {
     UPLOAD_ERR_EXTENSION => "File upload stopped by extension"
   );
    
+    
+    
+   /*
+    * METHODS specific for photograph
+    */
     //pass $_FILES['uploaded_file'] as an argument
     public function attach_file($file){
          //perform error checking on form parameters
@@ -55,12 +60,47 @@ class Photograph extends DatabaseObject {
         }
     }
     
-    
-
+    /*OVERRIDING   save method because here we have to do two things
+     * 1- moving the file (only if create)
+     * 2- then save the record (in both create() and update() case)
+     */
+    public function save(){
+        /*
+         * this function tries to create() and update() photograph object
+         * in db and return true/false on success/failure
+         */
+        
+        if(isset($this->id))
+        {
+             $this->update();
+        }
+        else{
+            //making sure no error
+           if(!empty($this->errors))//if any preexisting error in $errors[]
+               return false;
+            if(strlen($this->caption)>255){
+             $this->errors[]="The caption can only be 255 characters long.";   
+             return false;
+             }
+             //can't save with out name of file or temp_path
+             if(empty($this->filename)||empty($this->temp_path))
+             {
+                 $this->errors[]="The file location was not available";
+                 return false;
+             }
+             //finding target_path, we are in includes now
+             $target_path=
+             
+             
+            //moving file
+            //saving data to db
+            $this->create();
+        }
+    }
 
   
     
-    //METHODS specific for photograph
+  
     
     
     

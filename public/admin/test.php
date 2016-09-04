@@ -1,5 +1,6 @@
+
+<?php require_once('../../includes/includes.php');?>
 <?php
-require_once("../../includes/includes_admin.php");
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates

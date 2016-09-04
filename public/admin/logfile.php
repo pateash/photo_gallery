@@ -1,20 +1,21 @@
-<?php require_once('../../includes/includes_admin.php');?>
+<?php require_once('../../includes/includes.php');?>
 <?php 
 
   if(isset($_POST['clear-log'])){
-       $log_file="../../logs/logfile.txt";
+       $log_file=SITE_ROOT.DS."logs".DS."logfile.txt";
        file_put_contents($log_file,"");
        log_action("Log cleared ",$session->user_id);
   }
  ?>
 
- <?php include_once('../layouts/admin_header.php') ?>
+ <?php    include_layout('admin_header.php');
+ ?>
 
   <a href="index.php">&laquo;Back</a><br>
-    <h2 class="main-heading">Logfile</h2>
+    <h2 class="main-heading">Log file</h2>
     <?php 
-       $log_file="../../logs/logfile.txt";//taking from logfile inside admin
-       if(file_exists($log_file)&&is_readable($log_file)&&$handle=fopen($log_file,'r')){
+        $log_file=SITE_ROOT.DS."logs".DS."logfile.txt";
+      if(file_exists($log_file)&&is_readable($log_file)&&$handle=fopen($log_file,'r')){
        echo "<ul class=\"log-entries\">";
     
         while(!feof($handle)){
@@ -37,5 +38,6 @@
     </form>
     
 
-    
- <?php include_once('../layouts/admin_footer.php') ?>
+
+ <?php    include_layout('admin_header.php');
+ ?>

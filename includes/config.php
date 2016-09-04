@@ -11,4 +11,5 @@ defined('DB_SERVER')? null: define('DB_SERVER','localhost');#if already defined 
 defined('DB_USER')? null: define('DB_USER','pg_admin');
 defined('DB_PASS')? null: define('DB_PASS','pg_admin');
 defined('DB_NAME')? null: define('DB_NAME','photo_gallery');
+
 ?>

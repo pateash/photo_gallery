@@ -86,13 +86,18 @@ abstract class DatabaseObject#encapsulating any object which will interect with 
        }
   
   public function save(){//save in db
-     #this is a combination of create() and update()
-     #will update if this id already created because 
-     # one id will notbe assigned again
-     # willbe same for all objects
+     /* 
+      * this is a combination of create() and update()
+      *  will update if this id already created because 
+      *  id get assigned in create()
+      *  willbe same for all objects
+      */
      if(isset($this->id)){
+      
+         //if id already assigned
          $this->update();
      }else{
+         //if object has no id,assign it 
          $this->create();
      }
  }//SYNCHRONISE DB data with object
@@ -193,9 +198,10 @@ protected function attributes(){
      foreach(self::$db_fields as $field){
          //here if we use static::$db_fields then it is not working
         echo "<script> alert(".self::$table_name." ".static::$table_name."</script>";
-         if(property_exists($this,$field))
-         $attribute[$field]=$database->escape_value($this->$field);
-     } 
+        if (property_exists($this, $field)) {
+                $attribute[$field] = $database->escape_value($this->$field);
+            }
+        } 
     return $attribute;
 }
 protected function sanitized_attributes(){
