@@ -2,7 +2,11 @@
 <?php require_once('../../includes/includes.php');?>
 <?php if(!$session->is_logged_in()){redirect_to("login.php");}?>
 <?php
-$message="";
+//$message="";
+/*
+ * new we can't do that as  it will override the value taken by $message 
+ * taken from session in session.php
+ */
 if(isset($_POST['submit']))
 {
    $photo=new Photograph();
@@ -20,8 +24,10 @@ if(isset($_POST['submit']))
  */
   if($photo->save()){
       //success
-       $message="Photo uploaded successfully";
-  }
+      //setting message for later use in list_photos.php
+       $session->message("Photo uploaded successfully");
+       redirect_to('list_photos.php');
+     }
   else{
       //failure show errors[] array
           $message=join("<br>",$photo->errors);//
@@ -38,4 +44,5 @@ if(isset($_POST['submit']))
     <p><input type="text" name="caption" value=""/></p>
     <input type="submit" name="submit" value="Upload"/>
 </form>
+<a href="list_photos.php">View Photos</a>
 <?php include_layout('admin_footer.php')?>

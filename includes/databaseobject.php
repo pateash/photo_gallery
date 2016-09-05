@@ -40,7 +40,7 @@ abstract class DatabaseObject#encapsulating any object which will interect with 
         array_shift($attributes);//slicing off the key attribute so that we are not going to insert it otherwise error will occur
         
         $sql.=join(",",array_keys($attributes));//attributes are associative array
-        $sql.=" ) VALUES (' ";
+        $sql.=" ) VALUES ('";
         
     /*  REPLACED BY FOLLOWING FOR GENERALISATION  
        $sql.=$database->escape_value($this->username);

@@ -121,7 +121,24 @@ class Photograph extends DatabaseObject {
            }
     }
 
-  
+    public function size_to_text(){
+        //return size in specific formate
+        if($this->size<1024)
+            return $this->size." B";
+        elseif ($this->size<1048567) {
+            return round($this->size/1024)." KB";
+        }else 
+        {
+            return round($this->size/1048567,1)." MB";
+        }
+    }
+    public function image_path(){
+        /*
+         * return image_path i.e concatination of image name and directory 
+         * so that if in future directory changes then we only need to change in class
+         */
+        return $this->upload_dir.DS.$this->filename;
+    }
     
   
     
