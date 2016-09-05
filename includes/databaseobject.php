@@ -139,7 +139,8 @@ abstract class DatabaseObject#encapsulating any object which will interect with 
     }
 
  public static function find_by_id($id)
-    {
+    {   global $database;
+        $id=$database->escape_value($id);
         #this method return returns information of a user
         $sql="SELECT * FROM ".static::$table_name." WHERE id={$id} LIMIT 1 ";
         $object_array = static::find_by_sql($sql);

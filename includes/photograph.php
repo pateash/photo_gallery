@@ -121,6 +121,23 @@ class Photograph extends DatabaseObject {
            }
     }
 
+    public function destroy(){
+        /*
+         * two works
+         * 1-remove database entry
+         * 2-remove file from folder
+         */
+        if($this->delete()){
+            //remove file from folder
+            $target_path=SITE_ROOT.DS.'public'.DS.$this->image_path();
+            return unlink($target_path)? true:false;
+            //return true of false 
+        }else{
+            //database delete failed
+        }
+        
+    }
+    
     public function size_to_text(){
         //return size in specific formate
         if($this->size<1024)
@@ -132,6 +149,7 @@ class Photograph extends DatabaseObject {
             return round($this->size/1048567,1)." MB";
         }
     }
+   
     public function image_path(){
         /*
          * return image_path i.e concatination of image name and directory 
