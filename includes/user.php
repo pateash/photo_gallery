@@ -20,7 +20,7 @@ class User extends DatabaseObject
     public $last_name;
    //static data
     protected static $table_name='users';//static (same for all)
-    protected static $db_fields=array('username','password','first_name','last_name');
+    protected static $db_fields=array('id','username','password','first_name','last_name');
     //should be of same order as we have in method
     /* the $table_name override the $table_name in databaseObject class
     */

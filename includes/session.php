@@ -52,10 +52,10 @@ class Session{
    public function login($user_object){
      //function which will used to log in a passed user
      if($user_object){//if not null
-       $this->user_id=$_SESSION['user_id']=$user_object->id;//we have to manage session files as well as our attributes
-       $this->logged_in=true;
+         $this->user_id=$_SESSION['user_id']=$user_object->id;//we have to manage session files as well as our attributes
+         $this->logged_in=true;
      }
-   }
+     }
    public function logout(){
       unset($this->user_id);//manage both session files as well as our attributes 
       unset($_SESSION['user_id']);

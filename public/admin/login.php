@@ -8,12 +8,12 @@
  $message="Enter Your data to login";
  if(isset($_POST['submit'])){
  	//if post is submitted
- 	$username=trim($_POST['username']);
+    	$username=trim($_POST['username']);
  	$password=trim($_POST['password']);
 
  	//check database to see if username/password exists
  	$found_user=User::authenticate($username,$password);
-
+        
  	if($found_user){
             $session->login($found_user);
             #doing log action after logging in 
@@ -64,5 +64,5 @@
       </form>
 
 
- <?php  include_layout('admin_header.php'); ?>    
+ <?php  include_layout('admin_footer.php'); ?>    
  <?php if(isset($database)){unset($database);} ?>

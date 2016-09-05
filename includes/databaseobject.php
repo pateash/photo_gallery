@@ -185,6 +185,9 @@ abstract class DatabaseObject#encapsulating any object which will interect with 
         $object=new $class_name;//class object is made by name
          foreach ($result as $key => $value) {
             if($object->has_attribute($key)){
+                $message =" in instantiate";
+                $message.="key: {$key} and value: {$value}<br>";
+                log_action("debug", $message);
                 //has_attribute  checks if a key is present in an object
                 $object->$key=$value;
             }
@@ -200,7 +203,6 @@ protected function attributes(){
      $attribute=array();
      foreach(static::$db_fields as $field){
          //here if we use static::$db_fields then it is not working
-        echo "<script> alert(".self::$table_name." ".static::$table_name."</script>";
         if (property_exists($this, $field)) {
                 $attribute[$field] = $database->escape_value($this->$field);
             }
