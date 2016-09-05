@@ -35,7 +35,10 @@ abstract class DatabaseObject#encapsulating any object which will interect with 
          * 2- use a array in each database object subclass which contains all 
          */
         
-        $attributes=$this->sanitized_attributes();//fetching db attributes(because it is dbobject)         
+        $attributes=$this->sanitized_attributes();//fetching db attributes(because it is dbobject)    
+        
+        array_shift($attributes);//slicing off the key attribute so that we are not going to insert it otherwise error will occur
+        
         $sql.=join(",",array_keys($attributes));//attributes are associative array
         $sql.=" ) VALUES (' ";
         
@@ -46,6 +49,7 @@ abstract class DatabaseObject#encapsulating any object which will interect with 
         $sql.=" ' , ' ".$database->escape_value($this->last_name);
         $sql.=" ') ";
       */ 
+        //slicing is not required here as id has null which will automatically not comes because this function only returns non null values
         $sql.=join("','",array_values($attributes));
         $sql.="')";
         if($database->query($sql)){

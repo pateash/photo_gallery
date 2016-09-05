@@ -6,7 +6,7 @@
 class Photograph extends DatabaseObject {
     //staric data used by common methods
     protected static $table_name='photographs';
-    protected static $db_fields=  ['filename','type','size','caption'];
+    protected static $db_fields=  ['id','filename','type','size','caption'];
     
     //data fields
     public $id,$filename,$type,$size,$caption;
