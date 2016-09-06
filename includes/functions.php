@@ -21,27 +21,27 @@
   }
   ?>
 
-<?php 
+<?php  
   # __autoload() function is called automatically by PHP when 
   # PHP could not able to find some class or function 
   # we can use this to write some code that will automatically include some class 
   # if something is missing
   # we can search this class in any location
-  function __autoload($class_name){
+  function __autoload($class_name){ 
    $class_name=strtolower($class_name);
    //search in location 1
-   $path="../includes/{$class_name}.php";
+   $path=LIB_PATH.DS.$class_name.".php";
    if(file_exists($path)){
        // if found
      require_once($path);
    }
-   //search in location 2
-   $path="../../includes/{$class_name}.php";
- if(file_exists($path)){
-     #if found
-     require_once($path);
-   }
-   
+//   //search in location 2
+//   $path="../../includes/{$class_name}.php";
+// if(file_exists($path)){
+//     #if found
+//     require_once($path);
+//   }
+//   
    else{
        //if not found in any classes
    die("The Class {$class_name}.php not found...");
@@ -54,7 +54,7 @@
 <?php 
  # this will going to write the log function 
  function log_action($action,$message){
-  echo "log action message: ".$message."<br>";
+ // echo "log action message: ".$message."<br>";
   #called from admin folder
    $log_file="../../logs/logfile.txt";
    $content=strftime("%c",time());//%c will give format like tue feb 5 00:45:10 2009 
@@ -80,3 +80,10 @@
       
   }
  ?>
+
+<?php
+//this function includes a layout from absolute path
+function include_layout($template_file=""){
+     include_once(SITE_ROOT.DS.'public'.DS.'layouts'.DS.$template_file);
+}
+?>

@@ -4,7 +4,7 @@
 	<title>Photo Gallery</title>
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
-<body>
+<body> 
 <div id="header">
 	<h1>Photo Gallery</h1>
 </div>

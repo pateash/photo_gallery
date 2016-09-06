@@ -1,5 +1,6 @@
+<?php require_once('../../includes/includes.php');?>
+
 <?php 
-require_once('../../includes/includes_admin.php');
   if($session->is_logged_in()){
   	//if already logged in then no need to do this
   	redirect_to('index.php');
@@ -7,12 +8,12 @@ require_once('../../includes/includes_admin.php');
  $message="Enter Your data to login";
  if(isset($_POST['submit'])){
  	//if post is submitted
- 	$username=trim($_POST['username']);
+    	$username=trim($_POST['username']);
  	$password=trim($_POST['password']);
 
  	//check database to see if username/password exists
  	$found_user=User::authenticate($username,$password);
-
+        
  	if($found_user){
             $session->login($found_user);
             #doing log action after logging in 
@@ -32,7 +33,7 @@ require_once('../../includes/includes_admin.php');
 }
 ?>
 
-<?php include_once('../layouts/admin_header.php') ?>
+<?php include_layout('admin_header.php');?>
     <h2 class="main-heading">Staff Login</h2>
     <?php echo output_message($message); ?>
     <!-- form of login -->
@@ -63,5 +64,5 @@ require_once('../../includes/includes_admin.php');
       </form>
 
 
- <?php include_once('../layouts/admin_footer.php') ?>    
+ <?php  include_layout('admin_footer.php'); ?>    
  <?php if(isset($database)){unset($database);} ?>

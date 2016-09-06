@@ -1,4 +1,0 @@
-09/01/16 05:36:25  | Log cleared  : by User Id: 3
-09/01/16 05:36:27  | logged out  : by User Id: 3
-09/01/16 05:36:39  | logged in  : by User Id: 3
-09/01/16 05:40:26  | logged in  : by User Id: 3
