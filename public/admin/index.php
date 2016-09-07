@@ -23,6 +23,13 @@
    include_layout('admin_header.php');
  ?>
     <h2 class="main-heading">Menu</h2>
+    <strong><a href="photo_upload.php">Upload Photo</a>
+    </strong><br>
+    <br>
+  
+  <strong>  <a href="list_photos.php">View Photos</a>
+</strong>
+<br><br>
       <form method="post" action="index.php">
     	<!--the value $_POST['logout'] will be set when logout button will be clicked -->
     	<input type="submit" name="logout" value="Logout">
