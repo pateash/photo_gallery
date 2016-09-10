@@ -59,6 +59,18 @@ table.bordered tr th,table.bordered tr td{
     font-size:12px;
     
 }
+.message-success{
+    /*the div for marking in green */ 
+    border: green medium solid;
+    color:green;
+    padding:10px;
+    width: 200px;
+    background:#EEE4B9;
+    font-style:normal;
+    font-family: sans-serif;
+    font-size:12px;
+    
+}
 .main-heading{
     color:brown;
     font-family:sans-serif;

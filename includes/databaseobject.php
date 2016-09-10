@@ -102,10 +102,12 @@ abstract class DatabaseObject#encapsulating any object which will interect with 
      if(isset($this->id)){
       
          //if id already assigned
-         $this->update();
+       return $this->update();
+       //returning is necessary so that we can find if our work is successful or not
      }else{
          //if object has no id,assign it 
-         $this->create();
+        return $this->create();
+      //returning is necessary so that we can find if our work is successful or not
      }
  }//SYNCHRONISE DB data with object
  

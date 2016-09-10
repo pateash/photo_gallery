@@ -40,6 +40,7 @@ class Comment extends DatabaseObject{
          return null;//null and false are same
       $comment=new Comment();
       $comment->photograph_id=$photo_id;
+      $comment->created=strftime("%Y-%m-%d %H:%M:%S",time());
       $comment->author=$author;
       $comment->body=$body;
       return $comment;

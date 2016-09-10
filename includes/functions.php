@@ -71,14 +71,21 @@
 
 <?php
   function output_message($message){
+      if(is_array($message)){
+         //if array then decompose into variables
+          $flag=$message[1];
+         $message=$message[0];
+      }  
       if(trim($message)!=""){
-      echo "<p class='message'>";
+        if(isset($flag)&& $flag)//if set and true then color green(for success)
+          echo "<p class='message-success' style='color:green'>";
+        else
+           echo "<p class='message'>";
       echo $message;
       echo "</p>";
       }
       //we do not have to do any thing if message is empty
-      
-  }
+     }
  ?>
 
 <?php
