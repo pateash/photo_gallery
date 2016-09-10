@@ -192,7 +192,6 @@ abstract class DatabaseObject#encapsulating any object which will interect with 
             if($object->has_attribute($key)){
                 $message =" in instantiate";
                 $message.="key: {$key} and value: {$value}<br>";
-                log_action("debug", $message);
                 //has_attribute  checks if a key is present in an object
                 $object->$key=$value;
             }
