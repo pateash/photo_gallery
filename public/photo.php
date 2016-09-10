@@ -22,10 +22,20 @@ if(isset($_POST['submit']))
    //here author and body are of comment
    if($new_comment&&$new_comment->save()){
        //comment successfully created and saved(save() of database object)
-       $message=["You have commented Successfully",true];
-       $author="";
-       $body="";
-   }
+       $session->message(["You have commented Successfully",true]);
+       //here array is passed which will be stored in session's message and can be used by output_message()
+       
+/*
+ *        $author="";   $body="";
+ *  we are doing so that after success we are not getting the field filled
+ *  with value, but there is a problem here which is that if we reload the page
+ *  then we again post that comment, to remove this we can redirect to same page
+ *  so that it becomes a GET request and automatically in 
+ *  else os isset($_POST['submit']) we clear the $author and $body;
+ * but to get get the $messaget again we have to use $_SESSION and for this we have to store them
+ */
+   redirect_to("photo.php?id=".$photo->id);
+    }
    else{
        $message="Comment failed";
    }
@@ -36,14 +46,46 @@ else{
   $body="";
 }
 ?>
+<?php
+//CODE SECTION FOR GETTING COMMENTS FROM DATABASE 
+/*
+ * $comments=  Comment::find_comments_on($photo->id);
+ * REPLACED WITH Object oriented way in which we have created method
+ *  comments() in class Photograph
+ */
+$comments=$photo->comments();
+?>
+
 <?php include_layout('header.php');?>
 <a href="index.php">&laquo; Back </a><br><br>
 
 <div style="margin-left:20px;">
-    <img src='<?php echo $photo->image_path()?>' width="80%" height="80%"/>
-    <p><?php  echo $photo->caption;?></p>
+   <p style="color: #8D0D19;font-size: 30px"><?php  echo $photo->caption;?></p>
+    <img src='<?php echo $photo->image_path()?>' width="60%" height="80%"/>
 </div>
+<br><br>
 <!-- LIST COMMENTS HERE-->
+<div id="comments">
+     
+    <?php foreach($comments as $comment):?>
+    <div class="comment" style="margin-bottom:2em; color:blue">
+        <div class="author" style="color: #8D0D19;font-family: sans-serif;font-size: large">
+            <?php
+            echo htmlentities((ucwords($comment->author)));//to make it writable to html
+            ?> wrote:
+        </div>
+        <div class="body">
+            <?php echo strip_tags($comment->body,'<strong><em><p>');?>
+        </div>
+        <div class="meta-info" style="font-size:0.8em;">
+            <?php echo datetime_to_text($comment->created);?>
+        </div>
+    </div>
+    <hr>
+    <?php  endforeach;?>
+    <?php if(empty($comments)){echo "No comments.";}?>
+</div>
+<hr>
 <div id="comment-form">
     <h3>New Comment </h3>
     <?php echo output_message($message);?> 
@@ -66,15 +108,8 @@ else{
                  <td>&nbsp;</td>
                  <td><input type="submit" name="submit" value="Comment"/></td>
             </tr>
-           
-            
-            
         </table>
-            
-    
-    
-    </form>
-    
+     </form>
 </div>
      
 <?php include_layout('footer.php');?>

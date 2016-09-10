@@ -157,7 +157,12 @@ class Photograph extends DatabaseObject {
          */
         return $this->upload_dir.DS.$this->filename;
     }
-    
+   public function comments(){
+       /*
+        * function to return comments for a photo
+        */
+       return Comment::find_comments_on($this->id);
+   } 
   
     
     
