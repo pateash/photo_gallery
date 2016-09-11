@@ -2,7 +2,8 @@
 #created by Ashish Patel
 nbproject/ 
 images/
-
+_mmServerScripts/
+logs/
 
 
 # Created by https://www.gitignore.io/api/netbeans
