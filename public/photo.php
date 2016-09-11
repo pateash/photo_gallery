@@ -17,7 +17,7 @@
 if(isset($_POST['submit']))
 {
     $author=trim($_POST['author']);
-    $body=trim($_POST['body']);   
+    $body=trim($_POST['body']);//nl2br  is used to that newline can be converted in to <br> and saved   
     $new_comment=  Comment::make($photo->id, $author, $body);
    //here author and body are of comment
    if($new_comment&&$new_comment->save()){
