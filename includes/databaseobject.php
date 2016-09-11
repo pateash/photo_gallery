@@ -166,7 +166,19 @@ abstract class DatabaseObject#encapsulating any object which will interect with 
        return $object_array;
     }
  
-  
+   public static function count_all(){
+       //this function counts no. of elements in a table
+       global $database;
+       $sql="SELECT COUNT(*) FROM ".static::$table_name;
+        $result_set= $database->query($sql);
+        $result=$database->fetch_array($result_set);
+        /*
+         * although this is returning no. of elements 
+         * but it will also returned in form of result set
+         * in which first row have ans
+         */
+       return array_shift($result);
+   }
     
     
     
