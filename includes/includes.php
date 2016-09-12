@@ -45,11 +45,13 @@ require_once(LIB_PATH.DS.'functions.php');
 require_once(LIB_PATH.DS.'session.php');
 require_once(LIB_PATH.DS.'mysqldatabase.php');
 
+
 //4- database related classses
 require_once(LIB_PATH.DS.'databaseobject.php');
 /*
  * here as 'user' class uses database object 'databaseobject' must be loaded first
  */
-require_once(LIB_PATH.DS.'user.php');
 
+require_once(LIB_PATH.DS.'user.php');
+require_once(LIB_PATH.DS.'pagination.php');
  ?>

@@ -39,7 +39,7 @@ if(isset($_POST['submit']))
 <h2>Photo Upload</h2>
 <?php echo output_message($message)?>
 <form action="photo_upload.php" method="post" enctype="multipart/form-data">
-    <input type="hidden" name="MAX_FILE_SIZE" value="1048567"/>
+    <input type="hidden" name="MAX_FILE_SIZE" value="3145728"/>
     <p><input type="file" name="file_upload"/></p>
     <p><input type="text" name="caption" value=""/></p>
     <input type="submit" name="submit" value="Upload"/>
